@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5434:5432
+    volumes:
+      - ./psql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=tim7
+      - POSTGRES_USER=tim7
+      - POSTGRES_DB=grafana_db
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    ports:
+      - '3030:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+volumes:
+  grafana-storage: {}
